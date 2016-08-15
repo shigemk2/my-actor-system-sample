@@ -13,9 +13,11 @@ object ReferenceApp extends App {
     // フルパス
     // val actor1 = system.actorSelection("akka://ReferenceApp/user/router1/$b")
     // 相対パス
-    val actor1 = system.actorSelection("/user/router1/$b")
+    // val actor1 = system.actorSelection("/user/router1/$b")
+    val actors = system.actorSelection("/user/router1/*")
 
-    actor1 ! "Message1"
+    // actor1 ! "Message1"
+    actors ! "Message1"
 
     router1 ! "Message2"
     router1 ! "Message3"
