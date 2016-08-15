@@ -1,6 +1,6 @@
 package com.example
 
-import akka.actor.{ActorSystem, Props}
+import akka.actor.{ActorDSL, ActorSystem, Props}
 import akka.routing.FromConfig
 
 object ReferenceApp extends App {
@@ -15,6 +15,9 @@ object ReferenceApp extends App {
     // 相対パス
     // val actor1 = system.actorSelection("/user/router1/$b")
     val actors = system.actorSelection("/user/router1/*")
+    val rootInbox = ActorDSL.inbox()
+    actors.tell("Path1", rootInbox.getRef())
+    actors.tell("Path2", rootInbox.getRef())
 
     // actor1 ! "Message1"
     actors ! "Message1"
