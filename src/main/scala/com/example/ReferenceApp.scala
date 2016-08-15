@@ -10,7 +10,11 @@ object ReferenceApp extends App {
     val router1 = system.actorOf(FromConfig.props(Props[MessagePrintActor]), "router1")
     // val router1 = system.actorOf(Props[MessagePrintActor], "router1")
 
-    val actor1 = system.actorSelection("akka://ReferenceApp/user/router1/$b")
+    // フルパス
+    // val actor1 = system.actorSelection("akka://ReferenceApp/user/router1/$b")
+    // 相対パス
+    val actor1 = system.actorSelection("/user/router1/$b")
+
     actor1 ! "Message1"
 
     router1 ! "Message2"
